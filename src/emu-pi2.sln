@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "emu-pi2.UI", "emu-pi2.UI\em
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "emu-pi2.Core", "emu-pi2.Core\emu-pi2.Core.csproj", "{CAA6E24B-035B-495B-A4A5-1A09A2546ED8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "emu-pi2.Data", "emu-pi2.Data\emu-pi2.Data.csproj", "{1F591032-82EC-4836-B330-BA563912EF46}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,22 @@ Global
 		{CAA6E24B-035B-495B-A4A5-1A09A2546ED8}.Release|x64.Build.0 = Release|x64
 		{CAA6E24B-035B-495B-A4A5-1A09A2546ED8}.Release|x86.ActiveCfg = Release|x86
 		{CAA6E24B-035B-495B-A4A5-1A09A2546ED8}.Release|x86.Build.0 = Release|x86
+		{1F591032-82EC-4836-B330-BA563912EF46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F591032-82EC-4836-B330-BA563912EF46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F591032-82EC-4836-B330-BA563912EF46}.Debug|ARM.ActiveCfg = Debug|ARM
+		{1F591032-82EC-4836-B330-BA563912EF46}.Debug|ARM.Build.0 = Debug|ARM
+		{1F591032-82EC-4836-B330-BA563912EF46}.Debug|x64.ActiveCfg = Debug|x64
+		{1F591032-82EC-4836-B330-BA563912EF46}.Debug|x64.Build.0 = Debug|x64
+		{1F591032-82EC-4836-B330-BA563912EF46}.Debug|x86.ActiveCfg = Debug|x86
+		{1F591032-82EC-4836-B330-BA563912EF46}.Debug|x86.Build.0 = Debug|x86
+		{1F591032-82EC-4836-B330-BA563912EF46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F591032-82EC-4836-B330-BA563912EF46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F591032-82EC-4836-B330-BA563912EF46}.Release|ARM.ActiveCfg = Release|ARM
+		{1F591032-82EC-4836-B330-BA563912EF46}.Release|ARM.Build.0 = Release|ARM
+		{1F591032-82EC-4836-B330-BA563912EF46}.Release|x64.ActiveCfg = Release|x64
+		{1F591032-82EC-4836-B330-BA563912EF46}.Release|x64.Build.0 = Release|x64
+		{1F591032-82EC-4836-B330-BA563912EF46}.Release|x86.ActiveCfg = Release|x86
+		{1F591032-82EC-4836-B330-BA563912EF46}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

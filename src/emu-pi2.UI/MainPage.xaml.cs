@@ -1,4 +1,6 @@
 ﻿using emu_pi2.Core.Logging;
+using emu_pi2.Data.Services;
+using emu_pi2.Data.Services.Factory;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,11 +26,14 @@ namespace emu_pi2.UI
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private readonly IConsoleRepository _consolerepository;
+
         public MainPage()
         {
             this.InitializeComponent();
+            _consolerepository = ServiceFactory.Current.Create<IConsoleRepository>();
 
-            
+            var consoles = _consolerepository.GetAll();
         }
     }
 }
