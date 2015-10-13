@@ -17,6 +17,7 @@ namespace emu_pi2.Data.Services.Factory
             _mappings = new List<ServiceMapping>()
             {
                 new ServiceMapping() { InterfaceType = typeof(IConsoleRepository), ServiceType = typeof(MockConsoleRepository) },
+                new ServiceMapping() { InterfaceType = typeof(IGameRepository), ServiceType = typeof(MockGameRepository) },
             };
 
         }

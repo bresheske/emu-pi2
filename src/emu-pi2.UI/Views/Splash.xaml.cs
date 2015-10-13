@@ -17,7 +17,7 @@ using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace emu_pi2.UI
+namespace emu_pi2.UI.Views
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -35,23 +35,6 @@ namespace emu_pi2.UI
 
         private void PageLoaded(object sender, RoutedEventArgs e)
         {
-            // Init the background music.
-            _music = new MediaElement();
-            _music.Source = new Uri("ms-appx:///Assets/bg-ambient2.mp3");
-            _music.Volume = .5;
-            _music.MediaEnded += (o, args) =>
-            {
-                var element = (MediaElement)o;
-                element.Position = new TimeSpan(0, 0, 1);
-                element.Play();
-            };
-            _music.MediaFailed += (o, args) =>
-            {
-                Logger.Current.Log("Mediaplayer failed.");
-            };
-            grid.Children.Add(_music);
-            _music.Play();
-
             // Start the Animation.
             LoadIn.Completed += (o, args) =>
             {

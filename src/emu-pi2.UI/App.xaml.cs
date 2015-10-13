@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.ViewManagement;
 using emu_pi2.Core.Logging;
+using emu_pi2.UI.Views;
 
 namespace emu_pi2.UI
 {

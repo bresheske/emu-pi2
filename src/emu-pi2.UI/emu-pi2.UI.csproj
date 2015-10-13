@@ -100,14 +100,14 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Extensions\DependencyObjectExtensions.cs" />
-    <Compile Include="LayoutRootFrame.xaml.cs">
+    <Compile Include="Views\LayoutRootFrame.xaml.cs">
       <DependentUpon>LayoutRootFrame.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainPage.xaml.cs">
+    <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Splash.xaml.cs">
+    <Compile Include="Views\Splash.xaml.cs">
       <DependentUpon>Splash.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\MainViewModel.cs" />
@@ -140,15 +140,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="LayoutRootFrame.xaml">
+    <Page Include="Views\LayoutRootFrame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainPage.xaml">
+    <Page Include="Views\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Splash.xaml">
+    <Page Include="Views\Splash.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
