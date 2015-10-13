@@ -40,6 +40,8 @@ namespace emu_pi2.UI
         private readonly MainViewModel _viewmodel;
 
         private bool _isstateone = true;
+        private MediaElement _music;
+        private MediaElement _sound;
 
         private enum ActionType
         {
@@ -61,11 +63,34 @@ namespace emu_pi2.UI
             _viewmodel.Version = "Version: " + VERSION;
 
             this.DataContext = _viewmodel;
-            Window.Current.CoreWindow.KeyDown += PageKeyDown;
+            Window.Current.CoreWindow.KeyUp += PageKeyStroke;
         }
 
         private void PageLoaded(object sender, RoutedEventArgs e)
         {
+            // Init the background music.
+            _music = new MediaElement();
+            _music.Source = new Uri("ms-appx:///Assets/bg-ambient2.mp3");
+            _music.Volume = .5;
+            _music.MediaEnded += (o, args) =>
+            {
+                var element = (MediaElement)o;
+                element.Position = new TimeSpan(0, 0, 1);
+                element.Play();
+            };
+            _music.MediaFailed += (o, args) =>
+            {
+                Logger.Current.Log("Mediaplayer failed.");
+            };
+            LayoutRoot.Children.Add(_music);
+            _music.Play();
+
+            // Init the sound music.
+            _sound = new MediaElement();
+            _music.Volume = 1;
+            LayoutRoot.Children.Add(_sound);
+
+            // Focus the first Console.
             FocusConsole(_viewmodel.Consoles.First());
         }
 
@@ -125,7 +150,7 @@ namespace emu_pi2.UI
             ConsoleUnFocus.Begin();
         }
 
-        private void PageKeyDown(object sender, KeyEventArgs e)
+        private void PageKeyStroke(object sender, KeyEventArgs e)
         {
             // In here we need to manage the focused console.
             var action = GetAction(e.VirtualKey);
