@@ -27,6 +27,7 @@ namespace emu_pi2.UI
         {
             this.InitializeComponent();
             MainViewModel.Current.LayoutRoot = LayoutRoot;
+            MainViewModel.Current.SoundSelect = SoundSelect;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

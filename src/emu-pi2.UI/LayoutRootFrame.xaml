@@ -9,6 +9,7 @@
 
     <Grid>
         <MediaElement x:Name="Music" Source="Assets/bg-ambient2.mp3" Volume=".6" AutoPlay="True" IsLooping="True"></MediaElement>
+        <MediaElement x:Name="SoundSelect" Source="Assets/ui_select.wav" Volume="1" AutoPlay="False" IsLooping="False"></MediaElement>
         <Frame x:Name="LayoutRoot">
 
         </Frame>

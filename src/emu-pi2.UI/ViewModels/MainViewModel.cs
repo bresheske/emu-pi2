@@ -14,6 +14,7 @@ namespace emu_pi2.UI.ViewModels
         public string Version { get; set; }
         public Console SelectedConsole { get; set; }
         public Frame LayoutRoot { get; set; }
+        public MediaElement SoundSelect { get; set; }
 
         private static MainViewModel _instance;
 
@@ -32,5 +33,6 @@ namespace emu_pi2.UI.ViewModels
                 return _instance;
             }
         }
+        
     }
 }

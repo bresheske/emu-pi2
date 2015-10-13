@@ -40,7 +40,6 @@ namespace emu_pi2.UI
         private readonly MainViewModel _viewmodel;
 
         private bool _isstateone = true;
-        private MediaElement _sound;
 
         private enum ActionType
         {
@@ -67,11 +66,6 @@ namespace emu_pi2.UI
 
         private void PageLoaded(object sender, RoutedEventArgs e)
         {
-            // Init the sound music.
-            _sound = new MediaElement();
-            _sound.Volume = 1;
-            LayoutRoot.Children.Add(_sound);
-
             // Focus the first Console.
             FocusConsole(_viewmodel.Consoles.First());
         }
@@ -173,8 +167,7 @@ namespace emu_pi2.UI
             if (action == ActionType.Select)
             {
                 // Handle selection and not movement.
-                _sound.Source = new Uri("ms-appx:///Assets/ui_select.wav");
-                _sound.Play();
+                _viewmodel.SoundSelect.Play();
                 return;
             }
 
