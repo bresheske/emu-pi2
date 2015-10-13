@@ -22,6 +22,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
+using emu_pi2.UI.Extensions;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -96,17 +97,22 @@ namespace emu_pi2.UI
             var prevgrid = FindConsoleGrid(previousconsole);
             var newgrid = FindConsoleGrid(console);
 
+            // No action if we're on the first console and we hit 'left' or something.
+            if (console == previousconsole)
+                return;
+        
+            _viewmodel.SelectedConsole = console;
+
             ConsoleGainFocus(newgrid);
+
             // prevgrid could be null if it's the first selection.
             if (prevgrid != null)
                 ConsoleLoseFocus(prevgrid);
-            _viewmodel.SelectedConsole = console;
         }
 
         private void ConsoleGainFocus(FrameworkElement grid)
         {
-            _viewmodel.SelectedConsole = (Console)(grid.DataContext);
-            ShowBackgroundImage(_viewmodel.SelectedConsole.BackgroundLink);
+            ShowBackgroundImage(((Console)grid.DataContext).BackgroundLink);
             ConsoleFocus.Stop();
             Storyboard.SetTarget(ConsoleFocus, grid);
             ConsoleFocus.Begin();
@@ -148,7 +154,8 @@ namespace emu_pi2.UI
             if (console == null)
                 return null;
             ConsoleListGrid.UpdateLayout();
-            var grid = (FrameworkElement)ConsoleListGrid.ContainerFromItem(console);
+            var fe = (FrameworkElement)ConsoleListGrid.ContainerFromItem(console);
+            var grid = ((DependencyObject)fe).FindChildByType<Grid>();
             return grid;
         }
 
