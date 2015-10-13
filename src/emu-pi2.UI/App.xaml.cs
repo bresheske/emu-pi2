@@ -77,7 +77,7 @@ namespace emu_pi2.UI
                 // When the navigation stack isn't restored navigate to the first page,
                 // configuring the new page by passing required information as a navigation
                 // parameter
-                rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                rootFrame.Navigate(typeof(LayoutRootFrame), typeof(Splash));
             }
 
             // Maximize the App.

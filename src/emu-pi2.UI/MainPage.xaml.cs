@@ -40,7 +40,6 @@ namespace emu_pi2.UI
         private readonly MainViewModel _viewmodel;
 
         private bool _isstateone = true;
-        private MediaElement _music;
         private MediaElement _sound;
 
         private enum ActionType
@@ -57,7 +56,7 @@ namespace emu_pi2.UI
         {
             this.InitializeComponent();
             _consolerepository = ServiceFactory.Current.Create<IConsoleRepository>();
-            _viewmodel = new MainViewModel();
+            _viewmodel = MainViewModel.Current;
 
             _viewmodel.Consoles = _consolerepository.GetAll();
             _viewmodel.Version = "Version: " + VERSION;
@@ -68,26 +67,8 @@ namespace emu_pi2.UI
 
         private void PageLoaded(object sender, RoutedEventArgs e)
         {
-            // Init the background music.
-            _music = new MediaElement();
-            _music.Source = new Uri("ms-appx:///Assets/bg-ambient2.mp3");
-            _music.Volume = .5;
-            _music.MediaEnded += (o, args) =>
-            {
-                var element = (MediaElement)o;
-                element.Position = new TimeSpan(0, 0, 1);
-                element.Play();
-            };
-            _music.MediaFailed += (o, args) =>
-            {
-                Logger.Current.Log("Mediaplayer failed.");
-            };
-            LayoutRoot.Children.Add(_music);
-            _music.Play();
-
             // Init the sound music.
             _sound = new MediaElement();
-            _music.Volume = 1;
             LayoutRoot.Children.Add(_sound);
 
             // Focus the first Console.
@@ -188,6 +169,16 @@ namespace emu_pi2.UI
         {
             var selectedconsole = _viewmodel.SelectedConsole;
             
+            if (action == ActionType.Select)
+            {
+                // Handle selection and not movement.
+                _sound.Source = new Uri("ms-appx:///Assets/ui_select.wav");
+                _sound.Play();
+                return;
+            }
+
+            // Handle movement.
+
             // Finds the index of the selected console.
             var index = _viewmodel.Consoles
                 .Select((x, i) => new { Obj = x, Index = i })
