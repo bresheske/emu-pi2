@@ -100,6 +100,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Extensions\DependencyObjectExtensions.cs" />
+    <Compile Include="Views\GamesListPage.xaml.cs">
+      <DependentUpon>GamesListPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\LayoutRootFrame.xaml.cs">
       <DependentUpon>LayoutRootFrame.xaml</DependentUpon>
     </Compile>
@@ -140,6 +143,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Views\GamesListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\LayoutRootFrame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

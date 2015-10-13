@@ -23,9 +23,22 @@
         <Storyboard x:Name="ConsoleUnFocus">
             <DoubleAnimation Duration="0:0:.5" To=".4" From="1" Storyboard.TargetProperty="(FrameworkElement.Opacity)" d:IsOptimized="True"/>
         </Storyboard>
+
+        <Storyboard x:Name="LoadIn">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="LayoutRoot">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="LoadOut">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="LayoutRoot">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
     </Page.Resources>
 
-    <Grid x:Name="LayoutRoot" RequestedTheme="Dark" Background="#FF000000">
+    <Grid x:Name="LayoutRoot" RequestedTheme="Dark" Background="#FF000000" Opacity="0">
 
         <!-- 2 Images for a Fade-Swapping effect -->
         <Image x:Name="BackgroundImage1" Opacity="0" />

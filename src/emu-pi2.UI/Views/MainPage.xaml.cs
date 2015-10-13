@@ -68,6 +68,7 @@ namespace emu_pi2.UI.Views
         {
             // Focus the first Console.
             FocusConsole(_viewmodel.Consoles.First());
+            LoadIn.Begin();
         }
 
         private void ShowBackgroundImage(string src)
