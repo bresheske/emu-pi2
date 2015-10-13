@@ -1,4 +1,7 @@
-﻿using System;
+﻿using emu_pi2.Data.Services;
+using emu_pi2.Data.Services.Factory;
+using emu_pi2.UI.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,9 +25,15 @@ namespace emu_pi2.UI.Views
     /// </summary>
     public sealed partial class GamesListPage : Page
     {
+        private readonly IGameRepository _gamerepository;
+
         public GamesListPage()
         {
             this.InitializeComponent();
+            _gamerepository = ServiceFactory.Current.Create<IGameRepository>();
+
+            MainViewModel.Current.Games = _gamerepository.GetAllForConsole(MainViewModel.Current.SelectedConsole.Id);
+            this.DataContext = MainViewModel.Current;
         }
     }
 }
