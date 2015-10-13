@@ -10,6 +10,8 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.System;
+using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -31,11 +33,22 @@ namespace emu_pi2.UI
     public sealed partial class MainPage : Page
     {
         public const string VERSION = "1.0.0";
+        public const int MAX_CONSOLE_COLUMNS = 5;
 
         private readonly IConsoleRepository _consolerepository;
         private readonly MainViewModel _viewmodel;
 
         private bool _isstateone = true;
+
+        private enum ActionType
+        {
+            None,
+            Up,
+            Left,
+            Down,
+            Right,
+            Select
+        };
 
         public MainPage()
         {
@@ -47,6 +60,12 @@ namespace emu_pi2.UI
             _viewmodel.Version = "Version: " + VERSION;
 
             this.DataContext = _viewmodel;
+            Window.Current.CoreWindow.KeyDown += PageKeyDown;
+        }
+
+        private void PageLoaded(object sender, RoutedEventArgs e)
+        {
+            FocusConsole(_viewmodel.Consoles.First());
         }
 
         private void ShowBackgroundImage(string src)
@@ -71,20 +90,98 @@ namespace emu_pi2.UI
             _isstateone = !_isstateone;
         }
 
-        private void ConsoleGainedFocus(object sender, PointerRoutedEventArgs e)
+        private void FocusConsole(Console console)
         {
-            _viewmodel.SelectedConsole = (Console)((Grid)sender).DataContext;
+            var previousconsole = _viewmodel.SelectedConsole;
+            var prevgrid = FindConsoleGrid(previousconsole);
+            var newgrid = FindConsoleGrid(console);
+
+            ConsoleGainFocus(newgrid);
+            // prevgrid could be null if it's the first selection.
+            if (prevgrid != null)
+                ConsoleLoseFocus(prevgrid);
+            _viewmodel.SelectedConsole = console;
+        }
+
+        private void ConsoleGainFocus(FrameworkElement grid)
+        {
+            _viewmodel.SelectedConsole = (Console)(grid.DataContext);
             ShowBackgroundImage(_viewmodel.SelectedConsole.BackgroundLink);
             ConsoleFocus.Stop();
-            Storyboard.SetTarget(ConsoleFocus, (DependencyObject)sender);
+            Storyboard.SetTarget(ConsoleFocus, grid);
             ConsoleFocus.Begin();
         }
 
-        private void ConsoleLostFocus(object sender, PointerRoutedEventArgs e)
+        private void ConsoleLoseFocus(FrameworkElement grid)
         {
             ConsoleUnFocus.Stop();
-            Storyboard.SetTarget(ConsoleUnFocus, (DependencyObject)sender);
+            Storyboard.SetTarget(ConsoleUnFocus, grid);
             ConsoleUnFocus.Begin();
+        }
+
+        private void PageKeyDown(object sender, KeyEventArgs e)
+        {
+            // In here we need to manage the focused console.
+            var action = GetAction(e.VirtualKey);
+            if (action != ActionType.None)
+                PerformAction(action);
+        }
+
+        private ActionType GetAction(VirtualKey key)
+        {
+            if (key == VirtualKey.Up || key == VirtualKey.GamepadDPadUp)
+                return ActionType.Up;
+            else if (key == VirtualKey.Down || key == VirtualKey.GamepadDPadDown)
+                return ActionType.Down;
+            else if (key == VirtualKey.Left || key == VirtualKey.GamepadDPadLeft)
+                return ActionType.Left;
+            else if (key == VirtualKey.Right || key == VirtualKey.GamepadDPadRight)
+                return ActionType.Right;
+            else if (key == VirtualKey.Select || key == VirtualKey.Enter || key == VirtualKey.GamepadMenu)
+                return ActionType.Select;
+            else
+                return ActionType.None;
+        }
+
+        private FrameworkElement FindConsoleGrid(Console console)
+        {
+            if (console == null)
+                return null;
+            ConsoleListGrid.UpdateLayout();
+            var grid = (FrameworkElement)ConsoleListGrid.ContainerFromItem(console);
+            return grid;
+        }
+
+        private void PerformAction(ActionType action)
+        {
+            var selectedconsole = _viewmodel.SelectedConsole;
+            
+            // Finds the index of the selected console.
+            var index = _viewmodel.Consoles
+                .Select((x, i) => new { Obj = x, Index = i })
+                .First(x => x.Obj == selectedconsole).Index;
+
+            // Sets the desired change in index.
+            var indexdelta = 0;
+            if (action == ActionType.Left)
+                indexdelta = -1;
+            else if (action == ActionType.Right)
+                indexdelta = 1;
+            else if (action == ActionType.Up)
+                indexdelta = -MAX_CONSOLE_COLUMNS;
+            else if (action == ActionType.Down)
+                indexdelta = MAX_CONSOLE_COLUMNS;
+
+            // Makes sure we stay within out array bounds.
+            index += indexdelta;
+            if (index < 0)
+                index = 0;
+            if (index >= _viewmodel.Consoles.Count())
+                index = _viewmodel.Consoles.Count() - 1;
+
+            // Performs the focus changes.
+            var newconsole = _viewmodel.Consoles.ElementAt(index);
+            FocusConsole(newconsole);
         }
 
     }
