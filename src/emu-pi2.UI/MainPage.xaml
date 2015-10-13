@@ -7,5 +7,13 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid x:Name="LayoutRoot" RequestedTheme="Dark" Background="#FF000000"/>
+    <Grid x:Name="LayoutRoot" RequestedTheme="Dark" Background="#FF000000">
+        <ItemsControl ItemsSource="{Binding Path=Consoles}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Path=ShortName}"></TextBlock>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
 </Page>
