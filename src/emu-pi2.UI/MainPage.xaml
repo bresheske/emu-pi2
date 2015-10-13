@@ -7,14 +7,29 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <Storyboard x:Name="ShowImage1">
+            <DoubleAnimation Duration="0:0:1" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="BackgroundImage1" EnableDependentAnimation="True"/>
+            <DoubleAnimation Duration="0:0:1" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="BackgroundImage2" EnableDependentAnimation="True"/>
+        </Storyboard>
+        <Storyboard x:Name="ShowImage2">
+            <DoubleAnimation Duration="0:0:1" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="BackgroundImage1" EnableDependentAnimation="True"/>
+            <DoubleAnimation Duration="0:0:1" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="BackgroundImage2" EnableDependentAnimation="True"/>
+        </Storyboard>
+    </Page.Resources>
+
     <Grid x:Name="LayoutRoot" RequestedTheme="Dark" Background="#FF000000">
+        
         <!-- 2 Images for a Fade-Swapping effect -->
-        <Image Name="BackgroundImage1" Source="Assets/bg-snes.jpg" ></Image>
-        <Image Name="BackgroundImage2" ></Image>
+        <Image x:Name="BackgroundImage1" Opacity="0" />
+        <Image x:Name="BackgroundImage2" Opacity="0" />
         <Grid Opacity=".6" Background="White" Height="50" VerticalAlignment="Top" >
-            <TextBlock Text="Project Emu-Pi2" Foreground="Black" HorizontalAlignment="Right" FontSize="26.667" VerticalAlignment="Center" Margin="0,0,10,0"></TextBlock>
+            <TextBlock Text="Project Emu-Pi2" Foreground="Black" HorizontalAlignment="Right" FontSize="26.667" VerticalAlignment="Center" Margin="0,0,10,0"/>
         </Grid>
-        <ItemsControl ItemsSource="{Binding Path=Consoles}" Margin="0,50,0,0">
+        <Grid Opacity=".6" Background="White" Height="50" VerticalAlignment="Bottom" >
+            <TextBlock Text="{Binding Version}" Foreground="Black" HorizontalAlignment="Right" FontSize="26.667" VerticalAlignment="Center" Margin="0,0,10,0"/>
+        </Grid>
+        <ItemsControl ItemsSource="{Binding Consoles}" Margin="0,50,0,0">
             <!-- This is the template for the whole grid. -->
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -25,8 +40,8 @@
             <!-- This is the template for each item. -->
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Grid Opacity="0.8" CornerRadius="3" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Height="190" Margin="20" BorderBrush="#FF402C2C" Background="#FF192F42">
-                        <TextBlock Text="{Binding Path=ShortName}" FontWeight="Bold" FontSize="48" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                    <Grid Opacity="0.8" CornerRadius="3" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Height="190" Margin="20" BorderBrush="#FF402C2C" Background="#FF192F42" PointerEntered="ConsoleGainedFocus">
+                        <TextBlock Text="{Binding ShortName}" FontWeight="Bold" FontSize="48" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>

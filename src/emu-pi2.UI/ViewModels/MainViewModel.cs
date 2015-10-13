@@ -10,5 +10,7 @@ namespace emu_pi2.UI.ViewModels
     public class MainViewModel
     {
         public IEnumerable<Console> Consoles{ get; set; }
+        public string Version { get; set; }
+        public Console SelectedConsole { get; set; }
     }
 }
