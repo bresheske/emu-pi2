@@ -9,18 +9,18 @@
 
     <Page.Resources>
         <Storyboard x:Name="ShowImage1">
-            <DoubleAnimation Duration="0:0:.6" To="1" From="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="BackgroundImage1" EnableDependentAnimation="True"/>
-            <DoubleAnimation Duration="0:0:.6" To="0" From="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="BackgroundImage2" EnableDependentAnimation="True"/>
+            <DoubleAnimation Duration="0:0:.4" To="1" From="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="BackgroundImage1" EnableDependentAnimation="True"/>
+            <DoubleAnimation Duration="0:0:.4" To="0" From="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="BackgroundImage2" EnableDependentAnimation="True"/>
         </Storyboard>
         <Storyboard x:Name="ShowImage2">
-            <DoubleAnimation Duration="0:0:.6" To="0" From="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="BackgroundImage1" EnableDependentAnimation="True"/>
-            <DoubleAnimation Duration="0:0:.6" To="1" From="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="BackgroundImage2" EnableDependentAnimation="True"/>
+            <DoubleAnimation Duration="0:0:.4" To="0" From="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="BackgroundImage1" EnableDependentAnimation="True"/>
+            <DoubleAnimation Duration="0:0:.4" To="1" From="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="BackgroundImage2" EnableDependentAnimation="True"/>
         </Storyboard>
         <Storyboard x:Name="ConsoleFocus">
-            <DoubleAnimation Duration="0:0:.6" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" d:IsOptimized="True"/>
+            <DoubleAnimation Duration="0:0:.4" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" d:IsOptimized="True"/>
         </Storyboard>
         <Storyboard x:Name="ConsoleUnFocus">
-            <DoubleAnimation Duration="0:0:.6" To=".6" Storyboard.TargetProperty="(UIElement.Opacity)" d:IsOptimized="True"/>
+            <DoubleAnimation Duration="0:0:.4" To=".6" Storyboard.TargetProperty="(UIElement.Opacity)" d:IsOptimized="True"/>
         </Storyboard>
     </Page.Resources>
 
@@ -35,11 +35,11 @@
         <Grid Opacity=".6" Background="Black" Height="50" VerticalAlignment="Bottom" >
             <TextBlock Text="{Binding Version}" Foreground="White" HorizontalAlignment="Right" FontSize="26.667" VerticalAlignment="Center" Margin="0,0,10,0"/>
         </Grid>
-        <ItemsControl ItemsSource="{Binding Consoles}" Margin="0,50,0,0">
+        <ItemsControl ItemsSource="{Binding Consoles}" Margin="0,100,0,0">
             <!-- This is the template for the whole grid. -->
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                    <ItemsWrapGrid Orientation="Horizontal" HorizontalAlignment="Center"></ItemsWrapGrid>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
 
