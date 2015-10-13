@@ -8,7 +8,13 @@
     mc:Ignorable="d">
 
     <Grid x:Name="LayoutRoot" RequestedTheme="Dark" Background="#FF000000">
-        <ItemsControl ItemsSource="{Binding Path=Consoles}">
+        <!-- 2 Images for a Fade-Swapping effect -->
+        <Image Name="BackgroundImage1" Source="Assets/bg-snes.jpg" ></Image>
+        <Image Name="BackgroundImage2" ></Image>
+        <Grid Opacity=".6" Background="White" Height="50" VerticalAlignment="Top" >
+            <TextBlock Text="Project Emu-Pi2" Foreground="Black" HorizontalAlignment="Right" FontSize="26.667" VerticalAlignment="Center" Margin="0,0,10,0"></TextBlock>
+        </Grid>
+        <ItemsControl ItemsSource="{Binding Path=Consoles}" Margin="0,50,0,0">
             <!-- This is the template for the whole grid. -->
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
