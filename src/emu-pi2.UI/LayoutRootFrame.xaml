@@ -8,7 +8,7 @@
     mc:Ignorable="d">
 
     <Grid>
-        <MediaElement x:Name="Music" Source="Assets/bg-ambient2.mp3" Volume="1" AutoPlay="True" IsLooping="True"></MediaElement>
+        <MediaElement x:Name="Music" Source="Assets/bg-ambient2.mp3" Volume=".6" AutoPlay="True" IsLooping="True"></MediaElement>
         <Frame x:Name="LayoutRoot">
 
         </Frame>

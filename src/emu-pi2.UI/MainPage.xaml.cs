@@ -69,6 +69,7 @@ namespace emu_pi2.UI
         {
             // Init the sound music.
             _sound = new MediaElement();
+            _sound.Volume = 1;
             LayoutRoot.Children.Add(_sound);
 
             // Focus the first Console.
