@@ -13,6 +13,7 @@ namespace emu_pi2.Data.Objects
         public int Id { get; set; }
         public string ShortName { get; set; }
         public string LongName { get; set; }
+        public string BackgroundLink { get; set; }
 
     }
 }
