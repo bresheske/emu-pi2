@@ -65,7 +65,8 @@ namespace emu_pi2.UI
             {
                 BackgroundImage1.Source = source;
             }
-
+            ShowImage1.Stop();
+            ShowImage2.Stop();
             animation.Begin();
             _isstateone = !_isstateone;
         }
@@ -74,6 +75,17 @@ namespace emu_pi2.UI
         {
             _viewmodel.SelectedConsole = (Console)((Grid)sender).DataContext;
             ShowBackgroundImage(_viewmodel.SelectedConsole.BackgroundLink);
+            ConsoleFocus.Stop();
+            Storyboard.SetTarget(ConsoleFocus, (DependencyObject)sender);
+            ConsoleFocus.Begin();
         }
+
+        private void ConsoleLostFocus(object sender, PointerRoutedEventArgs e)
+        {
+            ConsoleUnFocus.Stop();
+            Storyboard.SetTarget(ConsoleUnFocus, (DependencyObject)sender);
+            ConsoleUnFocus.Begin();
+        }
+
     }
 }
