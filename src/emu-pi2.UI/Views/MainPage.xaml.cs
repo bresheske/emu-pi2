@@ -167,6 +167,9 @@ namespace emu_pi2.UI.Views
             
             if (action == ActionType.Select)
             {
+                // Clean up window handlers.
+                Window.Current.CoreWindow.KeyUp -= PageKeyStroke;
+
                 // Handle selection and not movement.
                 _viewmodel.SoundSelect.Play();
                 _viewmodel.LayoutRoot.NavigateToWithTransition(typeof(GamesListPage), LoadOut);

@@ -49,6 +49,7 @@ namespace emu_pi2.UI.Views
             if (_loaded)
             {
                 _loaded = false;
+                Window.Current.CoreWindow.KeyUp -= ClosePage;
                 MainViewModel.Current.LayoutRoot.NavigateToWithTransition(typeof(MainPage), LoadOut);
             }
         }
