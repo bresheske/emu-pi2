@@ -35,5 +35,10 @@ namespace emu_pi2.UI.Views
             MainViewModel.Current.Games = _gamerepository.GetAllForConsole(MainViewModel.Current.SelectedConsole.Id);
             this.DataContext = MainViewModel.Current;
         }
+
+        private void PageLoaded(object sender, RoutedEventArgs e)
+        {
+            LoadIn.Begin();
+        }
     }
 }

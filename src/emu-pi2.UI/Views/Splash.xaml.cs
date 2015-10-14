@@ -1,4 +1,5 @@
 ﻿using emu_pi2.Core.Logging;
+using emu_pi2.UI.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,6 +15,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using emu_pi2.UI.Extensions;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -25,7 +27,6 @@ namespace emu_pi2.UI.Views
     public sealed partial class Splash : Page
     {
         private bool _loaded;
-        private MediaElement _music;
 
         public Splash()
         {
@@ -48,14 +49,7 @@ namespace emu_pi2.UI.Views
             if (_loaded)
             {
                 _loaded = false;
-
-                LoadOut.Completed += (o, args) =>
-                {
-                    var nav = Frame.Navigate(typeof(MainPage));
-
-                };
-                LoadOut.Begin();
-
+                MainViewModel.Current.LayoutRoot.NavigateToWithTransition(typeof(MainPage), LoadOut);
             }
         }
     }

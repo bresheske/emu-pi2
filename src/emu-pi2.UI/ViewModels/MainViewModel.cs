@@ -10,10 +10,14 @@ namespace emu_pi2.UI.ViewModels
 {
     public class MainViewModel
     {
-        public IEnumerable<Console> Consoles{ get; set; }
+
+        public IEnumerable<Console> Consoles { get; set; }
         public IEnumerable<Game> Games { get; set; }
+
         public string Version { get; set; }
         public Console SelectedConsole { get; set; }
+        public Game SelectedGame { get; set; }
+
         public Frame LayoutRoot { get; set; }
         public MediaElement SoundSelect { get; set; }
 

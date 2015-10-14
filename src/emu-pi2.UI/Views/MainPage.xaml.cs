@@ -169,37 +169,40 @@ namespace emu_pi2.UI.Views
             {
                 // Handle selection and not movement.
                 _viewmodel.SoundSelect.Play();
-                return;
+                _viewmodel.LayoutRoot.NavigateToWithTransition(typeof(GamesListPage), LoadOut);
             }
+            else
+            {
+                // Handle movement.
 
-            // Handle movement.
+                // Finds the index of the selected console.
+                var index = _viewmodel.Consoles
+                    .Select((x, i) => new { Obj = x, Index = i })
+                    .First(x => x.Obj == selectedconsole).Index;
 
-            // Finds the index of the selected console.
-            var index = _viewmodel.Consoles
-                .Select((x, i) => new { Obj = x, Index = i })
-                .First(x => x.Obj == selectedconsole).Index;
+                // Sets the desired change in index.
+                var indexdelta = 0;
+                if (action == ActionType.Left)
+                    indexdelta = -1;
+                else if (action == ActionType.Right)
+                    indexdelta = 1;
+                else if (action == ActionType.Up)
+                    indexdelta = -MAX_CONSOLE_COLUMNS;
+                else if (action == ActionType.Down)
+                    indexdelta = MAX_CONSOLE_COLUMNS;
 
-            // Sets the desired change in index.
-            var indexdelta = 0;
-            if (action == ActionType.Left)
-                indexdelta = -1;
-            else if (action == ActionType.Right)
-                indexdelta = 1;
-            else if (action == ActionType.Up)
-                indexdelta = -MAX_CONSOLE_COLUMNS;
-            else if (action == ActionType.Down)
-                indexdelta = MAX_CONSOLE_COLUMNS;
+                // Makes sure we stay within out array bounds.
+                index += indexdelta;
+                if (index < 0)
+                    index = 0;
+                if (index >= _viewmodel.Consoles.Count())
+                    index = _viewmodel.Consoles.Count() - 1;
 
-            // Makes sure we stay within out array bounds.
-            index += indexdelta;
-            if (index < 0)
-                index = 0;
-            if (index >= _viewmodel.Consoles.Count())
-                index = _viewmodel.Consoles.Count() - 1;
-
-            // Performs the focus changes.
-            var newconsole = _viewmodel.Consoles.ElementAt(index);
-            FocusConsole(newconsole);
+                // Performs the focus changes.
+                var newconsole = _viewmodel.Consoles.ElementAt(index);
+                FocusConsole(newconsole);
+            }
+           
         }
 
     }

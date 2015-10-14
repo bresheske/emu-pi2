@@ -5,9 +5,46 @@
     xmlns:local="using:emu_pi2.UI.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    Loaded="PageLoaded">
+    <Page.Resources>
+        <Storyboard x:Name="LoadIn">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="GamesPageLayoutRoot">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="LoadOut">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="GamesPageLayoutRoot">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Page.Resources>
 
-    <Grid>
-        
+    <Grid x:Name="GamesPageLayoutRoot">
+        <ScrollViewer x:Name="scrollViewer" Background="#FF151515" HorizontalAlignment="Left" Width="400" Margin="0">
+            <ItemsControl Name="GamesListGrid" ItemsSource="{Binding Games}">
+                <!-- This is the template for the whole grid. -->
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel></StackPanel>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <!-- This is the template for each item. -->
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Opacity="0.6" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="60" Margin="0,2" BorderBrush="#FF402C2C" Background="#FF5F5F5F">
+                            <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="18.667" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White" Margin="10,0,0,0"/>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+        <Grid x:Name="grid" Margin="405,0,10,0" d:LayoutOverrides="LeftPosition, RightPosition" Padding="20">
+            <TextBlock x:Name="GameTitle" Margin="0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" FontSize="86.667" Foreground="#FFD8D8D8"/>
+            <Image x:Name="GameImage" Margin="0,10,10,0" Height="460" VerticalAlignment="Top" HorizontalAlignment="Right" Width="695"></Image>
+        </Grid>
     </Grid>
 </Page>

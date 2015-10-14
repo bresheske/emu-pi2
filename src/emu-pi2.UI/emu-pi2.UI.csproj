@@ -100,6 +100,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Extensions\DependencyObjectExtensions.cs" />
+    <Compile Include="Extensions\NavigationExtensions.cs" />
     <Compile Include="Views\GamesListPage.xaml.cs">
       <DependentUpon>GamesListPage.xaml</DependentUpon>
     </Compile>
