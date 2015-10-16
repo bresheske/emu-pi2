@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using emu_pi2.UI.Extensions;
+using emu_pi2.UI.Devices;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -31,7 +32,7 @@ namespace emu_pi2.UI.Views
         public Splash()
         {
             this.InitializeComponent();
-            Window.Current.CoreWindow.KeyUp += ClosePage;
+            Window.Current.CoreWindow.KeyDown += ClosePage;
         }
 
         private void PageLoaded(object sender, RoutedEventArgs e)
@@ -42,14 +43,19 @@ namespace emu_pi2.UI.Views
                 _loaded = true;
             };
             LoadIn.Begin();
-        }
 
-        private void ClosePage(object sender, KeyEventArgs e)
+            GamePad.Current.ButtonChanged += ClosePage;
+            GamePad.Current.Start(MainViewModel.Current.Dispatcher);
+        }
+        
+        private void ClosePage(object sender, object e)
         {
             if (_loaded)
             {
                 _loaded = false;
-                Window.Current.CoreWindow.KeyUp -= ClosePage;
+                GamePad.Current.ButtonChanged -= ClosePage;
+                GamePad.Current.Stop();
+                Window.Current.CoreWindow.KeyDown -= ClosePage;
                 MainViewModel.Current.LayoutRoot.NavigateToWithTransition(typeof(MainPage), LoadOut);
             }
         }

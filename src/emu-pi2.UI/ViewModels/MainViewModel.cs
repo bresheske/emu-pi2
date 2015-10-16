@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Core;
 
 namespace emu_pi2.UI.ViewModels
 {
@@ -38,6 +39,7 @@ namespace emu_pi2.UI.ViewModels
                 return _instance;
             }
         }
-        
+
+        public CoreDispatcher Dispatcher { get; internal set; }
     }
 }

@@ -23,6 +23,7 @@ using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using emu_pi2.UI.Extensions;
+using emu_pi2.UI.Devices;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -62,6 +63,8 @@ namespace emu_pi2.UI.Views
 
             this.DataContext = _viewmodel;
             Window.Current.CoreWindow.KeyUp += PageKeyStroke;
+            GamePad.Current.ButtonChanged += GamePadChanged;
+            GamePad.Current.Start(MainViewModel.Current.Dispatcher);
         }
 
         private void PageLoaded(object sender, RoutedEventArgs e)
@@ -125,6 +128,20 @@ namespace emu_pi2.UI.Views
             ConsoleUnFocus.Stop();
             Storyboard.SetTarget(ConsoleUnFocus, grid);
             ConsoleUnFocus.Begin();
+        }
+
+        private void GamePadChanged(object sender, ButtonChangedEventArgs args)
+        {
+            if (args.Buttons.Any(x => x.Button == ButtonStatus.ButtonType.A))
+                PerformAction(ActionType.Select);
+            else if (args.Buttons.Any(x => x.Button == ButtonStatus.ButtonType.Left))
+                PerformAction(ActionType.Left);
+            else if (args.Buttons.Any(x => x.Button == ButtonStatus.ButtonType.Right))
+                PerformAction(ActionType.Right);
+            else if (args.Buttons.Any(x => x.Button == ButtonStatus.ButtonType.Up))
+                PerformAction(ActionType.Up);
+            else if (args.Buttons.Any(x => x.Button == ButtonStatus.ButtonType.Down))
+                PerformAction(ActionType.Down);
         }
 
         private void PageKeyStroke(object sender, KeyEventArgs e)

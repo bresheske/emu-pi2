@@ -28,6 +28,7 @@ namespace emu_pi2.UI.Views
             this.InitializeComponent();
             MainViewModel.Current.LayoutRoot = LayoutRoot;
             MainViewModel.Current.SoundSelect = SoundSelect;
+            MainViewModel.Current.Dispatcher = Window.Current.CoreWindow.Dispatcher;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
